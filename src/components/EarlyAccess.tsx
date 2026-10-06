@@ -1,16 +1,29 @@
 import { useState } from 'react';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { EARLY_ACCESS_INTERESTS } from '@/constants';
 
+interface FormData {
+  firstName: string;
+  email: string;
+  interestType: string;
+  company: string;
+  message: string;
+}
+
+type SubmitState = 'idle' | 'loading' | 'success' | 'error';
+
 export default function EarlyAccess() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: '',
     email: '',
     interestType: '',
+    company: '',
+    message: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [serverError, setServerError] = useState('');
 
   const validate = () => {
     const next: Record<string, string> = {};
@@ -29,14 +42,33 @@ export default function EarlyAccess() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
+    if (submitState === 'loading') return;
+    setServerError('');
+    if (!validate()) return;
+
+    setSubmitState('loading');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setServerError(data.error || 'Could not send your request. Please try again later.');
+        setSubmitState('error');
+        return;
+      }
+      setSubmitState('success');
+    } catch {
+      setServerError('Could not send your request. Please try again later.');
+      setSubmitState('error');
     }
   };
 
-  const update = (field: string, value: string) => {
+  const update = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => {
@@ -44,6 +76,10 @@ export default function EarlyAccess() {
         delete next[field];
         return next;
       });
+    }
+    if (submitState === 'error') {
+      setSubmitState('idle');
+      setServerError('');
     }
   };
 
@@ -78,7 +114,7 @@ export default function EarlyAccess() {
 
         <ScrollReveal delay={150}>
           <div className="mt-12 rounded-2xl border border-white/10 bg-ink-900/80 p-6 lg:p-8">
-            {submitted ? (
+            {submitState === 'success' ? (
               <div className="text-center py-8">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-cyan-400/10 border border-cyan-400/20 mb-4">
                   <CheckCircle2 className="h-7 w-7 text-cyan-400" />
@@ -102,7 +138,8 @@ export default function EarlyAccess() {
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => update('firstName', e.target.value)}
-                    className={`w-full rounded-lg border bg-ink-800 px-4 py-3 text-base text-white placeholder-gray-500 transition-colors focus:outline-none focus:border-cyan-400/50 ${
+                    disabled={submitState === 'loading'}
+                    className={`w-full rounded-lg border bg-ink-800 px-4 py-3 text-base text-white placeholder-gray-500 transition-colors focus:outline-none focus:border-cyan-400/50 disabled:opacity-50 ${
                       errors.firstName ? 'border-danger-500/50' : 'border-white/10'
                     }`}
                     placeholder="Your first name"
@@ -125,7 +162,8 @@ export default function EarlyAccess() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => update('email', e.target.value)}
-                    className={`w-full rounded-lg border bg-ink-800 px-4 py-3 text-base text-white placeholder-gray-500 transition-colors focus:outline-none focus:border-cyan-400/50 ${
+                    disabled={submitState === 'loading'}
+                    className={`w-full rounded-lg border bg-ink-800 px-4 py-3 text-base text-white placeholder-gray-500 transition-colors focus:outline-none focus:border-cyan-400/50 disabled:opacity-50 ${
                       errors.email ? 'border-danger-500/50' : 'border-white/10'
                     }`}
                     placeholder="you@example.com"
@@ -147,7 +185,8 @@ export default function EarlyAccess() {
                     id="interestType"
                     value={formData.interestType}
                     onChange={(e) => update('interestType', e.target.value)}
-                    className={`w-full rounded-lg border bg-ink-800 px-4 py-3 text-base text-white transition-colors focus:outline-none focus:border-cyan-400/50 ${
+                    disabled={submitState === 'loading'}
+                    className={`w-full rounded-lg border bg-ink-800 px-4 py-3 text-base text-white transition-colors focus:outline-none focus:border-cyan-400/50 disabled:opacity-50 ${
                       errors.interestType ? 'border-danger-500/50' : 'border-white/10'
                     }`}
                     aria-invalid={!!errors.interestType}
@@ -167,16 +206,61 @@ export default function EarlyAccess() {
                   )}
                 </div>
 
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-200 mb-2">
+                    Company <span className="text-gray-400 font-normal">(optional)</span>
+                  </label>
+                  <input
+                    id="company"
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => update('company', e.target.value)}
+                    disabled={submitState === 'loading'}
+                    className="w-full rounded-lg border border-white/10 bg-ink-800 px-4 py-3 text-base text-white placeholder-gray-500 transition-colors focus:outline-none focus:border-cyan-400/50 disabled:opacity-50"
+                    placeholder="Your organization (optional)"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-200 mb-2">
+                    Message <span className="text-gray-400 font-normal">(optional)</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) => update('message', e.target.value)}
+                    disabled={submitState === 'loading'}
+                    rows={4}
+                    className="w-full rounded-lg border border-white/10 bg-ink-800 px-4 py-3 text-base text-white placeholder-gray-500 transition-colors focus:outline-none focus:border-cyan-400/50 disabled:opacity-50 resize-none"
+                    placeholder="Tell us about your interest or any questions you have (optional)"
+                  />
+                </div>
+
+                {submitState === 'error' && serverError && (
+                  <div className="flex items-start gap-2.5 rounded-lg border border-danger-500/30 bg-danger-500/10 px-4 py-3">
+                    <AlertCircle className="h-4 w-4 text-danger-400 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-danger-400">{serverError}</p>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center rounded-lg bg-cyan-400 px-6 py-3.5 text-sm font-semibold text-ink-900 transition-all hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.3)]"
+                  disabled={submitState === 'loading'}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-400 px-6 py-3.5 text-sm font-semibold text-ink-900 transition-all hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.3)] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
-                  Join the Early Access List
+                  {submitState === 'loading' ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Sending…
+                    </>
+                  ) : (
+                    'Join the Early Access List'
+                  )}
                 </button>
 
                 <p className="text-xs text-gray-400 text-center">
-                  This is a prototype form. No data is stored or sent — your
-                  information stays in your browser.
+                  Your information is sent securely to the Astrateq Gadgets team.
+                  We do not share your data.
                 </p>
               </form>
             )}

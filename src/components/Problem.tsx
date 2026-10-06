@@ -4,13 +4,13 @@ import { PROBLEM_CONCEPTS } from '@/constants';
 
 const ICONS = { EyeOff, Moon, TrendingDown };
 
-const PROBLEM_IMAGE = 'https://images.pexels.com/photos/3586772/pexels-photo-3586772.jpeg?auto=compress&cs=tinysrgb&w=1600';
+const PROBLEM_IMAGE = 'https://images.pexels.com/photos/3353610/pexels-photo-3353610.jpeg?auto=compress&cs=tinysrgb&w=1600';
 
 export default function Problem() {
   return (
     <section id="problem" className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-ink-850" />
-      <div className="absolute inset-0 grid-bg-fine opacity-30" />
+      <div className="absolute inset-0 grid-bg-fine opacity-25" />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <ScrollReveal>
@@ -31,10 +31,10 @@ export default function Problem() {
 
         {/* Cinematic wide image */}
         <ScrollReveal delay={150}>
-          <div className="mt-14 relative aspect-[21/9] rounded-2xl border border-white/10 overflow-hidden bg-ink-800">
+          <div className="mt-14 relative aspect-[21/8] rounded-2xl border border-white/10 overflow-hidden bg-ink-800">
             <img
               src={PROBLEM_IMAGE}
-              alt="A driver inside a vehicle during a night drive, illuminated by city lights"
+              alt="A driver inside a vehicle at night, moody interior view showing focus on the road"
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
             />
@@ -43,7 +43,7 @@ export default function Problem() {
             <div className="absolute inset-0 bg-gradient-to-r from-ink-850/50 to-transparent" />
 
             {/* Subtle grid overlay */}
-            <div className="absolute inset-0 grid-bg-fine opacity-15" />
+            <div className="absolute inset-0 grid-bg-fine opacity-10" />
 
             {/* Corner brackets */}
             {[

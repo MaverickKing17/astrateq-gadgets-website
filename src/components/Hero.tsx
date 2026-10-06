@@ -1,7 +1,7 @@
-import { Radar, ArrowRight, ArrowDown, Crosshair } from 'lucide-react';
+import { Radar, ArrowRight, ArrowDown, Crosshair, ScanLine } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
-const HERO_IMAGE = 'https://images.pexels.com/photos/18441117/pexels-photo-18441117.jpeg?auto=compress&cs=tinysrgb&w=1200';
+const HERO_IMAGE = 'https://images.pexels.com/photos/8387443/pexels-photo-8387443.jpeg?auto=compress&cs=tinysrgb&w=1200';
 
 export default function Hero() {
   return (
@@ -110,7 +110,7 @@ function HeroVisual() {
         {/* Base image */}
         <img
           src={HERO_IMAGE}
-          alt="Driver in a vehicle at night with city lights — concept visualization"
+          alt="Driver inside a vehicle at night with interior lighting — driver-monitoring concept visualization"
           className="absolute inset-0 h-full w-full object-cover"
           loading="eager"
         />
@@ -120,10 +120,10 @@ function HeroVisual() {
         <div className="absolute inset-0 bg-gradient-to-r from-ink-900/60 to-transparent" />
 
         {/* Subtle grid overlay */}
-        <div className="absolute inset-0 grid-bg-fine opacity-20" />
+        <div className="absolute inset-0 grid-bg-fine opacity-15" />
 
-        {/* Computer-vision face tracking overlay */}
-        <div className="absolute left-[34%] top-[20%] h-[38%] w-[22%]">
+        {/* Computer-vision face tracking overlay — positioned on the driver's face */}
+        <div className="absolute left-[28%] top-[18%] h-[40%] w-[24%]">
           {/* Tracking frame */}
           <div className="absolute inset-0 border border-cyan-400/40 rounded">
             {/* Corner markers */}
@@ -140,20 +140,22 @@ function HeroVisual() {
           <div className="absolute -top-5 left-0 font-mono text-[9px] text-cyan-400 tracking-wider">
             DRIVER · 0.98
           </div>
-          {/* Gaze indicator */}
-          <div className="absolute left-[45%] top-[40%]">
-            <Crosshair className="h-3 w-3 text-cyan-400/60" />
+          {/* Gaze direction indicator */}
+          <div className="absolute left-[42%] top-[35%]">
+            <Crosshair className="h-3.5 w-3.5 text-cyan-400/70" />
           </div>
+          {/* Gaze vector line */}
+          <div className="absolute left-[48%] top-[42%] h-px w-8 bg-gradient-to-r from-cyan-400/50 to-transparent" />
         </div>
 
-        {/* Observation points — subtle cyan dots */}
-        <div className="absolute left-[38%] top-[28%] h-1 w-1 rounded-full bg-cyan-400/60 animate-pulse" />
-        <div className="absolute left-[48%] top-[33%] h-1 w-1 rounded-full bg-cyan-400/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute left-[43%] top-[45%] h-1 w-1 rounded-full bg-cyan-400/40 animate-pulse" style={{ animationDelay: '1s' }} />
+        {/* Observation points — subtle cyan tracking dots */}
+        <div className="absolute left-[32%] top-[25%] h-1 w-1 rounded-full bg-cyan-400/60 animate-pulse" />
+        <div className="absolute left-[42%] top-[30%] h-1 w-1 rounded-full bg-cyan-400/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute left-[38%] top-[42%] h-1 w-1 rounded-full bg-cyan-400/40 animate-pulse" style={{ animationDelay: '1s' }} />
 
         {/* HUD overlays */}
         <div className="absolute top-3 left-3 font-mono text-[8px] text-cyan-400/70 tracking-wider">
-          CAM: FRONT · 1080p
+          CAM: INTERIOR · 1080p
         </div>
         <div className="absolute top-3 right-3 flex items-center gap-1 font-mono text-[8px] text-cyan-400/70 tracking-wider">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-blink" />
@@ -183,9 +185,9 @@ function HeroVisual() {
         ))}
       </div>
 
-      {/* Telemetry panel — kept from original */}
+      {/* Telemetry panel */}
       <div className="relative rounded-xl border border-white/10 bg-ink-800/70 backdrop-blur-sm overflow-hidden">
-        <div className="absolute inset-0 grid-bg-fine opacity-30" />
+        <div className="absolute inset-0 grid-bg-fine opacity-25" />
         <div className="relative z-10 p-4">
           {/* Mini telemetry rows */}
           <div className="space-y-2">

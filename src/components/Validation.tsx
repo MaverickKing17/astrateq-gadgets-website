@@ -79,37 +79,24 @@ export default function Validation() {
           </div>
         </ScrollReveal>
 
-        {/* Engineering visual */}
+        {/* Engineering visual — supporting element */}
         <ScrollReveal delay={150}>
-          <div className="mt-10 relative aspect-[21/9] rounded-2xl border border-white/10 overflow-hidden bg-ink-900">
+          <div className="mt-10 relative aspect-[16/5] rounded-xl border border-white/8 overflow-hidden bg-ink-900 max-w-3xl">
             <img
-              src="https://images.pexels.com/photos/6424583/pexels-photo-6424583.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src="https://images.pexels.com/photos/6424583/pexels-photo-6424583.jpeg?auto=compress&cs=tinysrgb&w=1200"
               alt="Code on a dark monitor representing the engineering and testing work behind Astrateq Gadgets"
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/50 to-ink-900/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-ink-900/60 to-transparent" />
-            <div className="absolute inset-0 grid-bg-fine opacity-15" />
-
-            {/* Corner brackets */}
-            {[
-              'top-3 left-3 border-l-2 border-t-2',
-              'top-3 right-3 border-r-2 border-t-2',
-              'bottom-3 left-3 border-l-2 border-b-2',
-              'bottom-3 right-3 border-r-2 border-b-2',
-            ].map((pos) => (
-              <div
-                key={pos}
-                className={`absolute ${pos} h-5 w-5 border-cyan-400/15 rounded-sm pointer-events-none`}
-              />
-            ))}
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/60 to-ink-900/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink-900/70 to-transparent" />
+            <div className="absolute inset-0 grid-bg-fine opacity-10" />
 
             {/* Label */}
-            <div className="absolute top-4 left-4 font-mono text-[9px] text-cyan-400/50 tracking-wider uppercase">
+            <div className="absolute top-3 left-3 font-mono text-[9px] text-cyan-400/50 tracking-wider uppercase">
               Engineering & Testing Environment
             </div>
-            <div className="absolute bottom-4 right-4 font-mono text-[9px] text-cyan-400/40 tracking-wider uppercase">
+            <div className="absolute bottom-3 right-3 font-mono text-[9px] text-cyan-400/40 tracking-wider uppercase">
               Build #68 · Codemagic CI
             </div>
           </div>

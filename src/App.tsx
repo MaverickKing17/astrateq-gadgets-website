@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import Technology from '@/components/Technology';
 import Problem from '@/components/Problem';
 import Dashboard from '@/components/Dashboard';
+import DriverStatePipeline from '@/components/DriverStatePipeline';
 import Validation from '@/components/Validation';
 import PreLaunch from '@/components/PreLaunch';
 import Audience from '@/components/Audience';
@@ -18,6 +19,7 @@ export default function App() {
         <Technology />
         <Problem />
         <Dashboard />
+        <DriverStatePipeline />
         <Validation />
         <PreLaunch />
         <Audience />

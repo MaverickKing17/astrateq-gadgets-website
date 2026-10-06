@@ -1,107 +1,94 @@
-import { Radar, ArrowDown, Cpu, Camera, Activity, ShieldCheck } from 'lucide-react';
+import { Radar, ArrowRight, ArrowDown, Crosshair } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
+
+const HERO_IMAGE = 'https://images.pexels.com/photos/18441117/pexels-photo-18441117.jpeg?auto=compress&cs=tinysrgb&w=1200';
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-12"
     >
       {/* Background layers */}
-      <div className="absolute inset-0 grid-bg opacity-60" />
+      <div className="absolute inset-0 grid-bg opacity-50" />
       <div className="absolute inset-0 radial-glow" />
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle at 70% 50%, rgba(13, 181, 176, 0.06), transparent 50%)',
+            'radial-gradient(circle at 70% 50%, rgba(0, 229, 255, 0.05), transparent 50%)',
         }}
       />
 
       {/* Scan line */}
-      <div className="absolute left-0 right-0 top-1/3 h-px bg-gradient-to-r from-transparent via-teal-400/30 to-transparent animate-scan-line pointer-events-none" />
+      <div className="absolute left-0 right-0 top-1/3 h-px bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent animate-scan-line pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 w-full">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left: Text */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6">
             <ScrollReveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-teal-400/20 bg-teal-400/5 px-3 py-1.5 mb-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-1.5 mb-8">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-teal-400" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-400" />
+                  <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-cyan-400" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
                 </span>
-                <span className="font-mono text-[11px] tracking-widest text-teal-300 uppercase">
-                  Pre-Launch · Build #68 · In Active Development
+                <span className="font-mono text-[11px] tracking-widest text-cyan-300 uppercase">
+                  Pre-Launch Driver Awareness Technology
                 </span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-white text-balance">
-                Driver intelligence,
+              <h1 className="font-display text-5xl sm:text-6xl lg:text-[64px] font-bold leading-[1.05] tracking-tight text-white text-balance">
+                Stay aware.
                 <br />
-                <span className="shimmer-text">observed in real time.</span>
+                <span className="shimmer-text">Drive safer.</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal delay={200}>
-              <p className="mt-6 max-w-xl text-base lg:text-lg leading-relaxed text-ink-300">
-                Astrateq Gadgets is a pre-launch iOS driver-awareness technology
-                project for the Canadian market — combining deterministic
-                driver-state simulation, camera observation, and a
-                driver-intelligence interpretation engine to understand the
-                person behind the wheel.
+              <p className="mt-8 max-w-xl text-lg lg:text-xl leading-relaxed text-gray-300">
+                Astrateq Gadgets is exploring intelligent driver-awareness
+                technology designed to identify indicators of distraction and
+                drowsiness and provide timely awareness signals.
               </p>
             </ScrollReveal>
 
-            <ScrollReveal delay={300}>
+            <ScrollReveal delay={280}>
+              <div className="mt-6 inline-flex items-center gap-2 text-sm text-gray-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                Currently in pre-launch validation.
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={360}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() =>
+                    document.querySelector('#early-access')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                  className="group inline-flex items-center gap-2 rounded-lg bg-cyan-400 px-6 py-3.5 text-sm font-semibold text-ink-900 transition-all hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.35)]"
+                >
+                  Join Early Access
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </button>
                 <button
                   onClick={() =>
                     document.querySelector('#technology')?.scrollIntoView({ behavior: 'smooth' })
                   }
-                  className="group inline-flex items-center gap-2 rounded-lg bg-teal-400 px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:bg-teal-300 hover:shadow-[0_0_30px_rgba(34,211,206,0.3)]"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:border-cyan-400/40 hover:bg-white/5"
                 >
                   Explore the Technology
-                  <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                  <ArrowDown className="h-4 w-4" />
                 </button>
-                <button
-                  onClick={() =>
-                    document.querySelector('#validation')?.scrollIntoView({ behavior: 'smooth' })
-                  }
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-teal-400/40 hover:bg-white/5"
-                >
-                  View Validation Timeline
-                </button>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={400}>
-              <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/5 rounded-xl overflow-hidden border border-white/5">
-                {[
-                  { icon: Camera, label: 'Camera' },
-                  { icon: Cpu, label: 'Simulation' },
-                  { icon: Activity, label: 'Interpretation' },
-                  { icon: ShieldCheck, label: 'Testing' },
-                ].map(({ icon: Icon, label }) => (
-                  <div
-                    key={label}
-                    className="flex flex-col items-center gap-2 bg-ink-850 px-4 py-5"
-                  >
-                    <Icon className="h-5 w-5 text-teal-400" />
-                    <span className="font-mono text-[10px] tracking-widest text-ink-300 uppercase">
-                      {label}
-                    </span>
-                  </div>
-                ))}
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right: Animated visual panel */}
-          <div className="lg:col-span-5">
+          {/* Right: Cinematic driver visual + telemetry panel */}
+          <div className="lg:col-span-6">
             <ScrollReveal delay={300}>
               <HeroVisual />
             </ScrollReveal>
@@ -117,92 +104,120 @@ export default function Hero() {
 
 function HeroVisual() {
   return (
-    <div className="relative aspect-[4/5] rounded-2xl border border-white/8 bg-ink-850/60 backdrop-blur-sm overflow-hidden">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 grid-bg-fine opacity-50" />
-
-      {/* Radial glow */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 40%, rgba(13, 181, 176, 0.1), transparent 60%)',
-        }}
-      />
-
-      {/* Corner brackets */}
-      {[
-        'top-4 left-4 border-l-2 border-t-2',
-        'top-4 right-4 border-r-2 border-t-2',
-        'bottom-4 left-4 border-l-2 border-b-2',
-        'bottom-4 right-4 border-r-2 border-b-2',
-      ].map((pos) => (
-        <div
-          key={pos}
-          className={`absolute ${pos} h-6 w-6 border-teal-400/30 rounded-sm`}
+    <div className="space-y-3">
+      {/* Cinematic driver image with CV overlay */}
+      <div className="relative aspect-[16/11] rounded-2xl border border-white/10 overflow-hidden bg-ink-800">
+        {/* Base image */}
+        <img
+          src={HERO_IMAGE}
+          alt="Driver in a vehicle at night with city lights — concept visualization"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
         />
-      ))}
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full p-8">
-        {/* Central radar */}
-        <div className="relative flex items-center justify-center">
-          {/* Pulse rings */}
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="absolute rounded-full border border-teal-400/20"
-              style={{
-                width: `${80 + i * 70}px`,
-                height: `${80 + i * 70}px`,
-                animation: `pulseRing 2.5s ease-out ${i * 0.8}s infinite`,
-              }}
-            />
-          ))}
+        {/* Dark gradient overlay for blending with design system */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-ink-900/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-900/60 to-transparent" />
 
-          {/* Core */}
-          <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-teal-400/20 to-teal-600/10 border border-teal-400/30">
-            <Radar className="h-8 w-8 text-teal-300 animate-spin" style={{ animationDuration: '8s' }} />
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 grid-bg-fine opacity-20" />
+
+        {/* Computer-vision face tracking overlay */}
+        <div className="absolute left-[34%] top-[20%] h-[38%] w-[22%]">
+          {/* Tracking frame */}
+          <div className="absolute inset-0 border border-cyan-400/40 rounded">
+            {/* Corner markers */}
+            {[
+              '-top-px -left-px border-l-2 border-t-2',
+              '-top-px -right-px border-r-2 border-t-2',
+              '-bottom-px -left-px border-l-2 border-b-2',
+              '-bottom-px -right-px border-r-2 border-b-2',
+            ].map((pos) => (
+              <div key={pos} className={`absolute ${pos} h-2.5 w-2.5 border-cyan-400`} />
+            ))}
+          </div>
+          {/* Label */}
+          <div className="absolute -top-5 left-0 font-mono text-[9px] text-cyan-400 tracking-wider">
+            DRIVER · 0.98
+          </div>
+          {/* Gaze indicator */}
+          <div className="absolute left-[45%] top-[40%]">
+            <Crosshair className="h-3 w-3 text-cyan-400/60" />
           </div>
         </div>
 
-        {/* Telemetry lines */}
-        <div className="mt-10 w-full space-y-2.5">
-          {[
-            { label: 'DRIVER STATE', value: 'ATTENTIVE', color: 'text-teal-300' },
-            { label: 'GAZE ALIGNMENT', value: '95%', color: 'text-white' },
-            { label: 'DROWSINESS INDEX', value: '5%', color: 'text-white' },
-            { label: 'TELEMETRY', value: 'ACTIVE', color: 'text-teal-300' },
-          ].map((row, i) => (
-            <div
-              key={row.label}
-              className="flex items-center justify-between border-b border-white/5 pb-2 animate-fade-in-up"
-              style={{ animationDelay: `${0.5 + i * 0.15}s`, opacity: 0 }}
-            >
-              <span className="font-mono text-[10px] tracking-widest text-ink-300 uppercase">
-                {row.label}
-              </span>
-              <span className={`font-mono text-xs font-semibold ${row.color} animate-data-flicker`}>
-                {row.value}
-              </span>
-            </div>
-          ))}
+        {/* Observation points — subtle cyan dots */}
+        <div className="absolute left-[38%] top-[28%] h-1 w-1 rounded-full bg-cyan-400/60 animate-pulse" />
+        <div className="absolute left-[48%] top-[33%] h-1 w-1 rounded-full bg-cyan-400/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute left-[43%] top-[45%] h-1 w-1 rounded-full bg-cyan-400/40 animate-pulse" style={{ animationDelay: '1s' }} />
+
+        {/* HUD overlays */}
+        <div className="absolute top-3 left-3 font-mono text-[8px] text-cyan-400/70 tracking-wider">
+          CAM: FRONT · 1080p
+        </div>
+        <div className="absolute top-3 right-3 flex items-center gap-1 font-mono text-[8px] text-cyan-400/70 tracking-wider">
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-blink" />
+          OBSERVING
+        </div>
+        <div className="absolute bottom-3 left-3 font-mono text-[8px] text-cyan-400/60 tracking-wider">
+          GAZE: FORWARD · ATTENTIVE
+        </div>
+        <div className="absolute bottom-3 right-3 font-mono text-[8px] text-cyan-400/60 tracking-wider">
+          FRAME: 2400 · 30 FPS
         </div>
 
-        {/* Disclaimer */}
-        <div className="mt-6 w-full">
-          <div className="rounded border border-amber-500/20 bg-amber-500/5 px-3 py-2">
+        {/* Scan line */}
+        <div className="absolute left-3 right-3 top-0 h-px bg-cyan-400/30 animate-scan-line pointer-events-none" />
+
+        {/* Corner brackets */}
+        {[
+          'top-3 left-3 border-l-2 border-t-2',
+          'top-3 right-3 border-r-2 border-t-2',
+          'bottom-3 left-3 border-l-2 border-b-2',
+          'bottom-3 right-3 border-r-2 border-b-2',
+        ].map((pos) => (
+          <div
+            key={pos}
+            className={`absolute ${pos} h-5 w-5 border-cyan-400/20 rounded-sm pointer-events-none`}
+          />
+        ))}
+      </div>
+
+      {/* Telemetry panel — kept from original */}
+      <div className="relative rounded-xl border border-white/10 bg-ink-800/70 backdrop-blur-sm overflow-hidden">
+        <div className="absolute inset-0 grid-bg-fine opacity-30" />
+        <div className="relative z-10 p-4">
+          {/* Mini telemetry rows */}
+          <div className="space-y-2">
+            {[
+              { label: 'DRIVER STATE', value: 'ATTENTIVE', color: 'text-cyan-300' },
+              { label: 'GAZE ALIGNMENT', value: '95%', color: 'text-white' },
+              { label: 'DROWSINESS INDEX', value: '5%', color: 'text-white' },
+              { label: 'AWARENESS', value: 'ACTIVE', color: 'text-cyan-300' },
+            ].map((row, i) => (
+              <div
+                key={row.label}
+                className="flex items-center justify-between border-b border-white/5 pb-1.5 animate-fade-in-up"
+                style={{ animationDelay: `${0.6 + i * 0.1}s`, opacity: 0 }}
+              >
+                <span className="font-mono text-[10px] tracking-widest text-gray-400 uppercase">
+                  {row.label}
+                </span>
+                <span className={`font-mono text-xs font-semibold ${row.color} animate-data-flicker`}>
+                  {row.value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Disclaimer */}
+          <div className="mt-3 rounded border border-amber-500/20 bg-amber-500/5 px-3 py-1.5">
             <p className="font-mono text-[9px] tracking-wider text-amber-400/80 uppercase text-center leading-relaxed">
-              Concept Interface
-              <br />
-              Illustrative data — not real-world performance
+              Concept Interface — Illustrative data, not real-world performance
             </p>
           </div>
         </div>
       </div>
-
-      {/* Scan line */}
-      <div className="absolute left-4 right-4 top-0 h-px bg-teal-400/40 animate-scan-line pointer-events-none" />
     </div>
   );
 }
